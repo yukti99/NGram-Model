@@ -14,7 +14,6 @@ import math
 
 
 
-
 class NGramModel:
     Vocab_size = 0
     ngram_probs = []
@@ -62,7 +61,7 @@ class NGramModel:
             if (text[i]==''):
                 text.pop(i)
                   
-        # ADDING <S> AT START AND <S> AT END OF EACH SENTENCE OF TEXT
+        # ADDING <S> AT START AND </S> AT END OF EACH SENTENCE OF TEXT
         cleaned_text = []    
         for sentence in text:
             s = ["<s>"]+sentence.strip().split()+["</s>"]
@@ -125,14 +124,14 @@ class NGramModel:
             except:
                 prefix_count = 0
                 
-            # Applying LAplace smoothing (Add-one) to resolve if an Ngram doesn't appear in the training corpus
+            # Applying Laplace smoothing (Add-one) to resolve if an Ngram doesn't appear in the training corpus
             try:
                 ngram_prob = ngrams[self.N-1][ngram]
             except:
                 ngram_prob = 0
                 
             # calculating the probability of current Ngram 
-            curr_ngram_prob = (ngram_prob +1)*1.0 / (prefix_count+NGramModel.Vocab_size)                  
+            curr_ngram_prob = (ngram_prob + 1)*1.0 / (prefix_count+NGramModel.Vocab_size)                  
                 
             # printing the probability of each ngram according to N (unigram, bigram, trigram, etc)        
             print("Probability of n-gram \"" + ngram + "\" = " + str(curr_ngram_prob))
@@ -237,7 +236,7 @@ class NGramModel:
             for sentence in generated_sentences:
                 print(no,") ",sentence)
                 no+=1      
-
+        print("\n\n\n")
     
 
 
